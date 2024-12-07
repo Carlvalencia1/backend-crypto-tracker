@@ -1,23 +1,20 @@
-import express from 'express'
+import dotenv from 'dotenv';
+import express from 'express';
 import morgan from 'morgan';
 import signale from 'signale';
-import cors from 'cors'
-
+import cors from 'cors';
 import { userRoutes } from './presentacion/routes/userRoute';
 
+dotenv.config();
 
-const app = express()
+const app = express();
 
-//Middleware para uso del payload
-app.use(express.json()) 
-//Middleware para tener un log personalizado
-app.use(morgan('dev'))
-//Middleware para el uso de cors
-app.use(cors())
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cors());
 
-//Recurso users
-app.use("/api/v1/users",userRoutes);
+app.use('/api/v1/users', userRoutes);
 
-app.listen(3000, ()=> {   
-    signale.success('Server open in port 3000')
-})
+app.listen(3000, () => {
+    signale.success('Server running on port 3000');
+});
